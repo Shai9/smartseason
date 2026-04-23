@@ -1,0 +1,22 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: postgres
+  password: postgres
+  host: localhost
+  port: 5432
+
+development:
+  <<: *default
+  database: smartseason_development
+
+test:
+  <<: *default
+  database: smartseason_test
+
+production:
+  <<: *default
+  database: smartseason_production
+  username: smartseason
+  password: <%= ENV["SMARTSEASON_DATABASE_PASSWORD"] %>
