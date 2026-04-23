@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SmartSeason Agent</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..28,300;12..28,400;12..28,500;12..28,600;12..28,700;12..28,800&display=swap" rel="stylesheet">
+    
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font-family: 'Bricolage Grotesque', sans-serif; background: #f3f4f6; }
+      .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+      .navbar { background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
+      .nav-brand { font-size: 1.5rem; font-weight: 700; color: #16a34a; letter-spacing: -0.02em; }
+      .nav-links { display: flex; gap: 20px; align-items: center; }
+      .btn { padding: 8px 16px; border-radius: 4px; text-decoration: none; display: inline-block; font-weight: 500; }
+      .btn-danger { background: #ef4444; color: white; border: none; cursor: pointer; }
+      .btn-primary { background: #16a34a; color: white; }
+      .btn-secondary { background: #6b7280; color: white; }
+      .alert { padding: 12px; margin-bottom: 20px; border-radius: 4px; }
+      .alert-notice { background: #dcfce7; border: 1px solid #86efac; color: #166534; }
+      .alert-alert { background: #fee2e2; border: 1px solid #fecaca; color: #991b1b; }
+      .card { background: white; border-radius: 8px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 20px; }
+      .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
+      .stat-card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+      .stat-number { font-size: 2rem; font-weight: 700; color: #16a34a; letter-spacing: -0.02em; }
+      .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px; }
+      .status-badge { padding: 4px 8px; border-radius: 4px; font-size: 0.875rem; display: inline-block; font-weight: 500; }
+      .status-active { background: #dcfce7; color: #166534; }
+      .status-at-risk { background: #fef3c7; color: #92400e; }
+      .status-completed { background: #f3f4f6; color: #374151; }
+      h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-brand">SmartSeason Agent</div>
+      <div class="nav-links">
+        <span><%= current_user&.name %></span>
+        <%= button_to "Logout", logout_path, method: :delete, class: "btn btn-danger", form: { data: { turbo: false } } %>
+      </div>
+    </nav>
+    
+    <div class="container">
+      <% if notice %>
+        <div class="alert alert-notice"><%= notice %></div>
+      <% end %>
+      
+      <% if alert %>
+        <div class="alert alert-alert"><%= alert %></div>
+      <% end %>
+      
+      <%= yield %>
+    </div>
+  </body>
+</html>

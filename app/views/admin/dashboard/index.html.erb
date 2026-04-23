@@ -1,0 +1,62 @@
+<div class="card">
+  <h1 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1.5rem;">Admin Dashboard</h1>
+  
+  <div class="stats">
+    <div class="stat-card">
+      <h3>Total Fields</h3>
+      <div class="stat-number"><%= @fields.count %></div>
+    </div>
+    <div class="stat-card">
+      <h3>Active Fields</h3>
+      <div class="stat-number" style="color: #16a34a;"><%= @fields.select { |f| f.computed_status == 'Active' }.count %></div>
+    </div>
+    <div class="stat-card">
+      <h3>At Risk</h3>
+      <div class="stat-number" style="color: #d97706;"><%= @fields.select { |f| f.computed_status == 'At Risk' }.count %></div>
+    </div>
+    <div class="stat-card">
+      <h3>Total Agents</h3>
+      <div class="stat-number"><%= @agents.count %></div>
+    </div>
+  </div>
+  
+  <div style="margin-top: 2rem;">
+    <h2 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">All Fields</h2>
+    <div style="overflow-x: auto;">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Crop</th>
+            <th>Agent</th>
+            <th>Stage</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @fields.each do |field| %>
+            <tr>
+              <td><%= field.name %></td>
+              <td><%= field.crop_type %></td>
+              <td><%= field.agent&.name || "Unassigned" %></td>
+              <td><%= field.current_stage %></td>
+              <td>
+                <span class="status-badge status-<%= field.computed_status.downcase.gsub(' ', '-') %>">
+                  <%= field.computed_status %>
+                </span>
+              </td>
+              <td>
+                <%= link_to "Edit", edit_field_path(field), style: "color: #2563eb; text-decoration: none;" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <div style="margin-top: 1.5rem;">
+    <%= link_to "Add New Field", new_field_path, class: "btn btn-primary" %>
+  </div>
+</div>

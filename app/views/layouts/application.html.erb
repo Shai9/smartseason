@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SmartSeason</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..28,300;12..28,400;12..28,500;12..28,600;12..28,700;12..28,800&display=swap" rel="stylesheet">
+    
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font-family: 'Bricolage Grotesque', sans-serif; background: #f3f4f6; }
+      .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+      .navbar { background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
+      .nav-brand { font-size: 1.5rem; font-weight: 700; color: #16a34a; letter-spacing: -0.02em; }
+      .nav-links { display: flex; gap: 20px; align-items: center; }
+      .btn { padding: 8px 16px; border-radius: 4px; text-decoration: none; display: inline-block; font-weight: 500; }
+      .btn-danger { background: #ef4444; color: white; border: none; cursor: pointer; }
+      .btn-primary { background: #16a34a; color: white; }
+      .alert { padding: 12px; margin-bottom: 20px; border-radius: 4px; }
+      .alert-notice { background: #dcfce7; border: 1px solid #86efac; color: #166534; }
+      .alert-alert { background: #fee2e2; border: 1px solid #fecaca; color: #991b1b; }
+      .card { background: white; border-radius: 8px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 20px; }
+      h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
+    </style>
+  </head>
+  <body>
+    <% if logged_in? %>
+      <nav class="navbar">
+        <div class="nav-brand">SmartSeason</div>
+        <div class="nav-links">
+          <span><%= current_user.name %> (<%= current_user.role %>)</span>
+          <%= button_to "Logout", logout_path, method: :delete, class: "btn btn-danger", form: { data: { turbo: false } } %>
+        </div>
+      </nav>
+    <% end %>
+    
+    <div class="container">
+      <% if notice %>
+        <div class="alert alert-notice"><%= notice %></div>
+      <% end %>
+      
+      <% if alert %>
+        <div class="alert alert-alert"><%= alert %></div>
+      <% end %>
+      
+      <%= yield %>
+    </div>
+  </body>
+</html>
