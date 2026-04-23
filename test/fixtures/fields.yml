@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  crop_type: MyString
+  planting_date: 2026-04-21
+  current_stage: 1
+  agent: one
+
+two:
+  name: MyString
+  crop_type: MyString
+  planting_date: 2026-04-21
+  current_stage: 1
+  agent: two
